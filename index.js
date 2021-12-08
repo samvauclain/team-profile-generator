@@ -17,11 +17,26 @@ function createEmployee() {
     {
         type: 'text',
         name: 'employeeID',
-        message: 'Who is your team manager?'
+        message: 'Employee ID number?'
+    },
+    {
+        type: 'text',
+        name: 'officeNumber',
+        message: 'Please enter in the office number'
+    },
+    {
+        type: 'text',
+        name: 'email',
+        message: 'Please enter in your email address'
+    },
+    {
+        type: 'text',
+        name: 'gitHubUser',
+        message: 'Please enter your GitHub username'
     },
     ])
-    .then(({ name, teamManager, employeeID }) => {
-        this.employee = new Employee(name, teamManager, employeeID);
+    .then(({ name, teamManager, employeeID, officeNumber, email,  gitHubUser}) => {
+        this.employee = new Employee(name, teamManager, employeeID, email, officeNumber, gitHubUser);
         console.log(this.employee);
     })
 };
