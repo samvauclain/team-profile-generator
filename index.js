@@ -38,7 +38,7 @@ function createEmployee() {
     },
     ])
     .then(({ name, teamManager, employeeID, officeNumber, email,  gitHubUser}) => {
-        this.employee = new Employee(name, teamManager, employeeID, email, officeNumber, gitHubUser);
+        this.employee = new Employee(name, teamManager, employeeID, officeNumber, email, gitHubUser);
         console.log(this.employee);
         writeToFile('./dist/index.html', generateHtml(this.employee));
     })
