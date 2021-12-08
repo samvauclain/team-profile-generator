@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
+const generateHtml = require('./src/generateHtml');
+const fs = require('fs');
 
 function createEmployee() {
     inquirer
@@ -38,7 +40,16 @@ function createEmployee() {
     .then(({ name, teamManager, employeeID, officeNumber, email,  gitHubUser}) => {
         this.employee = new Employee(name, teamManager, employeeID, email, officeNumber, gitHubUser);
         console.log(this.employee);
+        writeToFile('./dist/index.html', generateHtml(this.employee));
     })
 };
 
 createEmployee();
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        if (err) {
+          return err;
+        }
+    })
+}
