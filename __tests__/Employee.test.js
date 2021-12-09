@@ -1,5 +1,6 @@
 const Employee = require('../lib/Employee.js');
 
+// Break this into multiple tests
 test('creates an employee object', () => {
   const employee = new Employee('Sam', 'Bob', 312, 123, 'samvauclain@gmail.com', 'samvauclain');
 

@@ -2,10 +2,7 @@ const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const generateHtml = require('./src/generateHtml');
 const fs = require('fs');
-
-function createEmployee() {
-    inquirer
-    .prompt([
+var baseQs = [
     {
         type: 'text',
         name: 'name',
@@ -36,15 +33,40 @@ function createEmployee() {
         name: 'gitHubUser',
         message: 'Please enter your GitHub username'
     },
-    ])
-    .then(({ name, teamManager, employeeID, officeNumber, email,  gitHubUser}) => {
-        this.employee = new Employee(name, teamManager, employeeID, officeNumber, email, gitHubUser);
-        console.log(this.employee);
-        writeToFile('./dist/index.html', generateHtml(this.employee));
+    ]
+
+var manQs = [
+
+]
+function createEmployee() {
+    inquirer
+    .prompt({
+        type: 'list',
+        name: 'type',
+        message: 'what type of employee are you adding?',
+        choices: [
+            'Manager',
+            'Engineer',
+            'Intern'
+        ]
+    })
+    .then((empType) => {
+        switch (empType.type) {
+            case 'Manager':
+                addManager()        
+            break;
+          default:
+              break;
+      }
+        // writeToFile('./dist/index.html', generateHtml(employee));
     })
 };
 
-createEmployee();
+function addManager(){
+    inquirer.prompt(baseQs).then(data=> {
+        console.log(data)
+    })
+}
 
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, err => {
@@ -53,3 +75,6 @@ function writeToFile(fileName, data) {
         }
     })
 }
+
+createEmployee();
+
