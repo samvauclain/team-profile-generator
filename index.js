@@ -64,7 +64,7 @@ function createEmployee() {
 
 function addManager(){
     inquirer.prompt(baseQs).then(data=> {
-        console.log(data)
+        console.log(data.name)
     })
 }
 
