@@ -10,34 +10,37 @@ var baseQs = [
     },
     {
         type: 'text',
-        name: 'teamManager',
-        message: 'Who is your team manager?'
-    },
-    {
-        type: 'text',
         name: 'employeeID',
         message: 'Employee ID number?'
-    },
-    {
-        type: 'text',
-        name: 'officeNumber',
-        message: 'Please enter in the office number'
     },
     {
         type: 'text',
         name: 'email',
         message: 'Please enter in your email address'
     },
+]
+
+var manQs = [
+    {
+        type: 'text',
+        name: 'teamManager',
+        message: 'Who is your team manager?'
+    },
+    {
+        type: 'text',
+        name: 'officeNumber',
+        message: 'Please enter in the office number'
+    },
+]
+
+var EngQs = [
     {
         type: 'text',
         name: 'gitHubUser',
         message: 'Please enter your GitHub username'
     },
-    ]
-
-var manQs = [
-
 ]
+
 function createEmployee() {
     inquirer
     .prompt({
@@ -62,7 +65,19 @@ function createEmployee() {
     })
 };
 
-function addManager(){
+function addManager() {
+    inquirer.prompt(baseQs).then(data=> {
+        console.log(data)    
+    })
+}
+
+function addEngineer() {
+    inquirer.prompt(baseQs).then(data=> {
+        console.log(data.name)
+    })
+}
+
+function addIntern() {
     inquirer.prompt(baseQs).then(data=> {
         console.log(data.name)
     })
