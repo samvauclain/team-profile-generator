@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const generateHtml = require('./src/generateHtml');
 const fs = require('fs');
+const teamMembers = [];
 var baseQs = [
     {
         type: 'text',
@@ -20,7 +21,7 @@ var baseQs = [
     },
 ]
 
-var manQs = [
+var managerQs = [
     {
         type: 'text',
         name: 'teamManager',
@@ -33,13 +34,56 @@ var manQs = [
     },
 ]
 
-var EngQs = [
+var engineerQs = [
     {
         type: 'text',
         name: 'gitHubUser',
         message: 'Please enter your GitHub username'
     },
 ]
+
+var internQs = [
+    {
+        type: 'text',
+        name: 'school',
+        message: 'What school do you go to?'
+    },
+]
+
+const questions = {
+    engineer: engineerQs,
+    intern: internQs
+}
+
+const createMember = (type) => {
+    inquirer.prompt(questions[type]).then(res => {
+        teamMembers.push(res)
+        createEmployee();
+    })
+}
+
+function teamCreated(team) {
+    const fileName = "./dist/index.html"
+    fs.writeFile(fileName, generateHtml(team), err => {
+        if (err) {
+          return err;
+        }
+    })
+}
+
+// function createIntern() {
+//     inquirer.prompt(internQs).then(res => {
+//         teamMembers.push(res)
+//         createEmployee();
+//     })
+// }
+
+// function createEngineer() {
+//     inquirer.prompt(engineerQs).then(res => {
+//         teamMembers.push(res)
+//         createEmployee();
+//     })
+// }
 
 function createEmployee() {
     inquirer
@@ -48,16 +92,23 @@ function createEmployee() {
         name: 'type',
         message: 'what type of employee are you adding?',
         choices: [
-            'Manager',
             'Engineer',
-            'Intern'
-        ]
+            'Intern',
+            'Done adding employees'
+        ]  
     })
     .then((empType) => {
+        console.log(empType)
         switch (empType.type) {
-            case 'Manager':
-                addManager()        
+            case 'Engineer': 
+            createMember('engineer')   
             break;
+            case 'Intern':
+            createMember('intern')
+            break;
+            case 'Done adding employees':
+            teamCreated(teamMembers);
+                break;
           default:
               break;
       }
@@ -65,8 +116,22 @@ function createEmployee() {
     })
 };
 
-function addManager() {
+function createTeam() {
+    inquirer.prompt(managerQs) 
+    .then(res => {
+        teamMembers.push(res)
+        createEmployee();
+    })  
+}
+
+function addEmployee() {
     inquirer.prompt(baseQs).then(data=> {
+        console.log(data)    
+    })
+}
+
+function addManager() {
+    inquirer.prompt(managerQs).then(data=> {
         console.log(data)    
     })
 }
@@ -84,12 +149,7 @@ function addIntern() {
 }
 
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
-        if (err) {
-          return err;
-        }
-    })
+
 }
 
-createEmployee();
-
+createTeam();
