@@ -1,6 +1,9 @@
 function generateHtml(data) {
 console.log('data in generate:', data)
-var gh = '';
+var github = '';
+var officeNum = '';
+var internSchool = '';
+
 var teamCards = `
 <!doctype html>
 <html lang="en">
@@ -20,16 +23,17 @@ var teamCards = `
 ${
       data.map(element => {
       if (element.officeNumber) {
-        github = `<li class="list-group-item">${element.officeNumber}</li>`
+        officeNum = `<li class="list-group-item">Office Number: ${element.officeNumber}</li>`
       }
       if (element.gitHubUser) {
         github = `<li class="list-group-item">Github: <a href="https://github.com/${element.gitHubUser}" target="_blank">${element.gitHubUser}</a></li>`
       }
       if (element.school) {
-        github = `<li class="list-group-item">${element.school}</li>`
+        internSchool = `<li class="list-group-item">School: ${element.school}</li>`
       }
 
-      const text = `<div class="card" style="width: 18rem;">
+      const text = `<div class="col">
+      <div class="card" style="width: 18rem;">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body bg-primary text-light">
           <h5 class="card-title">${element.name}</h5>
@@ -39,11 +43,12 @@ ${
         <ul class="list-group my-4 px-2">
           <li class="list-group-item">Employee ID: ${element.employeeID}</li>
           <li class="list-group-item">Email: <a href="mailto:${element.email}">${element.email}</a></li>
-          ${officeNumber}
+          ${officeNum}
           ${github}
-          ${school}
+          ${internSchool}
           </ul>
         </div>
+      </div>
       </div>`
 
       return text;

@@ -101,6 +101,7 @@ function createEmployee() {
         name: 'type',
         message: 'Would you like to add an employee?',
         choices: [
+            'Manager',
             'Engineer',
             'Intern',
             'Done adding employees'
@@ -109,6 +110,9 @@ function createEmployee() {
     .then((empType) => {
         console.log(empType)
         switch (empType.type) {
+            case 'Manager': 
+            createMember('manager')   
+            break;
             case 'Engineer': 
                 createMember('engineer')   
             break;
