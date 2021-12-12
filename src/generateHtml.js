@@ -1,5 +1,6 @@
 function generateHtml(data) {
 console.log('data in generate:', data)
+var gh = '';
 var teamCards = `
 <!doctype html>
 <html lang="en">
@@ -18,6 +19,16 @@ var teamCards = `
 <div class="container mt-5">
 ${
       data.map(element => {
+      if (element.officeNumber) {
+        github = `<li class="list-group-item">${element.officeNumber}</li>`
+      }
+      if (element.gitHubUser) {
+        github = `<li class="list-group-item">Github: <a href="https://github.com/${element.gitHubUser}" target="_blank">${element.gitHubUser}</a></li>`
+      }
+      if (element.school) {
+        github = `<li class="list-group-item">${element.school}</li>`
+      }
+
       const text = `<div class="card" style="width: 18rem;">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body bg-primary text-light">
@@ -28,11 +39,10 @@ ${
         <ul class="list-group my-4 px-2">
           <li class="list-group-item">Employee ID: ${element.employeeID}</li>
           <li class="list-group-item">Email: <a href="mailto:${element.email}">${element.email}</a></li>
-          `
-          if (element.gutHubUser) {
-            `<li class="list-group-item">Github: <a href="https://github.com/${element.gutHubUser}" target="_blank">${element.gutHubUser}</a></li>`
-          }
-       `</ul>
+          ${officeNumber}
+          ${github}
+          ${school}
+          </ul>
         </div>
       </div>`
 

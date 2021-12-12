@@ -4,7 +4,7 @@ const generateHtml = require('./src/generateHtml');
 const fs = require('fs');
 const teamMembers = [];
 
-var baseQs = [
+var managerQs = [
     {
         type: 'text',
         name: 'name',
@@ -20,9 +20,6 @@ var baseQs = [
         name: 'email',
         message: 'Please enter in your email address'
     },
-]
-
-var managerQs = [
     {
         type: 'text',
         name: 'officeNumber',
@@ -33,6 +30,21 @@ var managerQs = [
 var engineerQs = [
     {
         type: 'text',
+        name: 'name',
+        message: 'What is your name?'
+    },
+    {
+        type: 'text',
+        name: 'employeeID',
+        message: 'Employee ID number?'
+    },
+    {
+        type: 'text',
+        name: 'email',
+        message: 'Please enter in your email address'
+    },
+    {
+        type: 'text',
         name: 'gitHubUser',
         message: 'Please enter your GitHub username'
     },
@@ -41,13 +53,28 @@ var engineerQs = [
 var internQs = [
     {
         type: 'text',
+        name: 'name',
+        message: 'What is your name?'
+    },
+    {
+        type: 'text',
+        name: 'employeeID',
+        message: 'Employee ID number?'
+    },
+    {
+        type: 'text',
+        name: 'email',
+        message: 'Please enter in your email address'
+    },
+    {
+        type: 'text',
         name: 'school',
         message: 'What school do you go to?'
     },
 ]
 
 const questions = {
-    base: baseQs,
+    manager: managerQs,
     engineer: engineerQs,
     intern: internQs
 }
@@ -94,17 +121,19 @@ function createEmployee() {
           default:
             break;
       }
-        
+
+        // teamMembers.push(res)
+               
     })
 };
 
-function createTeam() {
-    inquirer.prompt(baseQs) 
-    .then(res => {
-        teamMembers.push(res)
-        createEmployee();
-    })  
-}
+// function createTeam() {
+//     inquirer.prompt(baseQs) 
+//     .then(res => {
+//         teamMembers.push(res)
+//         createEmployee();
+//     })  
+// }
 
 // function addEmployee() {
 //     inquirer.prompt(baseQs).then(data=> {
@@ -134,4 +163,6 @@ function createTeam() {
 
 // }
 
-createTeam();
+// createTeam();
+
+createEmployee();
