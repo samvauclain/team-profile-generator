@@ -25,11 +25,6 @@ var baseQs = [
 var managerQs = [
     {
         type: 'text',
-        name: 'teamManager',
-        message: 'Who is your team manager?'
-    },
-    {
-        type: 'text',
         name: 'officeNumber',
         message: 'Please enter in the office number'
     },
@@ -52,6 +47,7 @@ var internQs = [
 ]
 
 const questions = {
+    base: baseQs,
     engineer: engineerQs,
     intern: internQs
 }
@@ -73,8 +69,7 @@ function teamCreated(team) {
 }
 
 function createEmployee() {
-    inquirer
-    .prompt({
+    inquirer.prompt({
         type: 'list',
         name: 'type',
         message: 'Would you like to add an employee?',
@@ -88,55 +83,55 @@ function createEmployee() {
         console.log(empType)
         switch (empType.type) {
             case 'Engineer': 
-            createMember('engineer')   
+                createMember('engineer')   
             break;
             case 'Intern':
-            createMember('intern')
+                createMember('intern')
             break;
             case 'Done adding employees':
-            teamCreated(teamMembers);
-                break;
+                teamCreated(teamMembers);
+            break;
           default:
-              break;
+            break;
       }
-        // writeToFile('./dist/index.html', generateHtml(employee));
+        
     })
 };
 
 function createTeam() {
-    inquirer.prompt(managerQs) 
+    inquirer.prompt(baseQs) 
     .then(res => {
         teamMembers.push(res)
         createEmployee();
     })  
 }
 
-function addEmployee() {
-    inquirer.prompt(baseQs).then(data=> {
-        console.log(data)    
-    })
-}
+// function addEmployee() {
+//     inquirer.prompt(baseQs).then(data=> {
+//         console.log(data)    
+//     })
+// }
 
-function addManager() {
-    inquirer.prompt(managerQs).then(data=> {
-        console.log(data)    
-    })
-}
+// function addManager() {
+//     inquirer.prompt(managerQs).then(data=> {
+//         console.log(data)    
+//     })
+// }
 
-function addEngineer() {
-    inquirer.prompt(baseQs).then(data=> {
-        console.log(data.name)
-    })
-}
+// function addEngineer() {
+//     inquirer.prompt(baseQs).then(data=> {
+//         console.log(data.name)
+//     })
+// }
 
-function addIntern() {
-    inquirer.prompt(baseQs).then(data=> {
-        console.log(data.name)
-    })
-}
+// function addIntern() {
+//     inquirer.prompt(baseQs).then(data=> {
+//         console.log(data.name)
+//     })
+// }
 
-function writeToFile(fileName, data) {
+// function writeToFile(fileName, data) {
 
-}
+// }
 
 createTeam();
