@@ -71,26 +71,12 @@ function teamCreated(team) {
     })
 }
 
-// function createIntern() {
-//     inquirer.prompt(internQs).then(res => {
-//         teamMembers.push(res)
-//         createEmployee();
-//     })
-// }
-
-// function createEngineer() {
-//     inquirer.prompt(engineerQs).then(res => {
-//         teamMembers.push(res)
-//         createEmployee();
-//     })
-// }
-
 function createEmployee() {
     inquirer
     .prompt({
         type: 'list',
         name: 'type',
-        message: 'what type of employee are you adding?',
+        message: 'Would you like to add an employee?',
         choices: [
             'Engineer',
             'Intern',
