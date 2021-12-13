@@ -1,11 +1,11 @@
 const inquirer = require('inquirer');
-const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const generateHtml = require('./src/generateHtml');
 const fs = require('fs');
 const teamMembers = [];
+var teamNum = 0;
 
 function createEmployee() {
     inquirer.prompt({
@@ -20,52 +20,57 @@ function createEmployee() {
         ]  
     })
     .then((empType) => {
-        console.log(empType)
-        switch (empType.type) {
-            case 'Manager': 
+        if (empType.type !== 'Done adding employees') {
+            teamNum++; 
+        }
+
+        if(empType.type === "Manager") {
                 teamMembers.push(new Manager());
-                    teamMembers[0].getName()
+                    teamMembers[teamNum].getName()
                     .then(() => 
-                    teamMembers[0].getId())
+                    teamMembers[teamNum].getId())
                     .then(() => 
-                    teamMembers[0].getEmail())
+                    teamMembers[teamNum].getEmail())
                     .then(() => 
-                    teamMembers[0].getOfficeNumber())
+                    teamMembers[teamNum].getOfficeNumber())
                     .then(() => 
                 createEmployee());  
-            break;
-            case 'Engineer': 
-                    team.push(new Engineer());
-                        teamMembers[0].getName()
+        }
+        if(empType.type === "Engineer") {
+                    teamMembers.push(new Engineer());
+                        teamMembers[teamNum].getName()
                         .then(() => 
-                        teamMembers[0].getId())
+                        teamMembers[teamNum].getId())
                         .then(() => 
-                        teamMembers[0].getEmail())
+                        teamMembers[teamNum].getEmail())
                         .then(() => 
-                        teamMembers[0].getGithub())
+                        teamMembers[teamNum].getGithub())
                     .then(() => 
                 createMember())
-            break;
-            case 'Intern':
-                team.push(new Intern());
-                    teamMembers[0].getName()
+        }
+        if(empType.type === "Intern") {
+                teamMembers.push(new Intern());
+                    teamMembers[teamNum].getName()
                     .then(() => 
-                    teamMembers[0].getId())
+                    teamMembers[teamNum].getId())
                     .then(() => 
-                    teamMembers[0].getEmail())
+                    teamMembers[teamNum].getEmail())
                     .then(() => 
-                    teamMembers[0].getSchool())
+                    teamMembers[teamNum].getSchool())
                     .then(() => 
                 createMember())
-            break;
-            case 'Done adding employees':
-                teamCreated(teamMembers);
-            break;
-          default:
-            break;
-      }
-              
-    })
+        }
+        else { 
+            return empType;
+        }
+      }).then(() => 
+        generateHTML(teamMembers, teamNum)
+    )
+    .then(HTMLFile => {
+            return writeToFile(HTMLFile);
+        })
+    .catch(err => {
+        console.log(err);}); 
 };
 
 createEmployee();

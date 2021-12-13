@@ -22,7 +22,7 @@ var teamCards = `
 
 <div class="container mt-5">`
 
-  for (var i = 0; i <= data; i++) {
+  for (var i = 0; i <= data.length; i++) {
         return `<div class="col">
         <div class="card" style="width: 18rem;">
           <!-- <img src="..." class="card-img-top" alt="..."> -->
