@@ -22,9 +22,10 @@ function createEmployee() {
     .then((empType) => {
         if(empType.type === "Manager") {
             teamMembers.push(new Manager());
-            return teamMembers[teamNum].getBasicInfo()
+            return teamMembers[teamNum].getGeneralInfo()
             .then(() => teamMembers[teamNum].getOfficeNumber())
             .then(() => teamMembers[teamNum].role = "Manager")
+            .then(() => teamMembers[teamNum].icon = `<i class="fas fa-tasks"></i>`)
             .then(() => {
                 teamNum++;
                 console.log(teamMembers)
@@ -32,10 +33,10 @@ function createEmployee() {
         }
         else if(empType.type === "Engineer") {
             teamMembers.push(new Engineer());
-            return teamMembers[teamNum].getBasicInfo()
+            return teamMembers[teamNum].getGeneralInfo()
             .then(() => teamMembers[teamNum].getGitHub())
             .then(() => teamMembers[teamNum].role = "Engineer")
-            .then(() => teamMembers[teamNum].icon = `<span class="material-icons">developer_mode</span>`)
+            .then(() => teamMembers[teamNum].icon = `<i class="fas fa-file-code"></i>`)
             .then(() => {
                 teamNum++;
                 return createEmployee()
@@ -43,10 +44,11 @@ function createEmployee() {
         }
         else if(empType.type === "Intern") {
             teamMembers.push(new Intern());
-            return teamMembers[teamNum].getBasicInfo()
+            return teamMembers[teamNum].getGeneralInfo()
                 .then(() => 
                 teamMembers[teamNum].getSchool())
                 .then(() => teamMembers[teamNum].role = "Intern")
+                .then(() => teamMembers[teamNum].icon = `<i class="fas fa-graduation-cap"></i>">`)
                 .then(() => {
                     teamNum++;
                     return createEmployee();

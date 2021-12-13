@@ -1,5 +1,11 @@
-const checkIfEqual = require('../lib/manager.js');
+const Manager = require("../lib/manager");
 
-test('checks if 10 is equal to 10', () => {
-    expect(checkIfEqual(10, 10)).toBe(true);
-  });
+test("Manager enters their office number", () => {
+    const name = "name"
+    const id = "employeeID"
+    const email = "email"
+    const OfficeNumber = "officeNumber";
+
+    const e = new Manager(name, id, email, OfficeNumber);
+    expect(e.OfficeNumber).toBe(OfficeNumber);
+});
