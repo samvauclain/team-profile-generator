@@ -48,7 +48,7 @@ function createEmployee() {
                 .then(() => 
                 teamMembers[teamNum].getSchool())
                 .then(() => teamMembers[teamNum].role = "Intern")
-                .then(() => teamMembers[teamNum].icon = `<i class="fas fa-graduation-cap"></i>">`)
+                .then(() => teamMembers[teamNum].icon = `<i class="fas fa-graduation-cap"></i>`)
                 .then(() => {
                     teamNum++;
                     return createEmployee();

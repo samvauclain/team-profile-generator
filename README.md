@@ -1,9 +1,24 @@
-# team-profile-generator
+# Team Profile Generator
+
+## Installation
+- Install node.js if you don't already have it [Download Here](https://nodejs.org/en/)
+- You can check to see if node is installed by typing **node -v** into your terminal 
+- Fork the repo.
+- Clone to your local directory of choice.
+- In your root folder, install the dependencies by entering **npm install** in your terminal.
+
+## Walkthrough Video
+Once you have everything installed, [Click to watch:] (https://watch.screencastify.com/v/nzck9uSvW9KhYfsbPASC)
+
 
 ### AS A manager
 - I WANT to generate a webpage that displays my team's basic info
 - SO THAT I have quick access to their emails and GitHub profiles  
 - GIVEN a command-line application that accepts user input
+
+Covered in the video:
+- Type node index to bring up the prompts
+- Once completed, look in the **dist/** folder to find your generated index.html file containg your team!
 
 ---
 
