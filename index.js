@@ -8,7 +8,7 @@ const teamMembers = [];
 var teamNum = 0;
 
 function createEmployee() {
-    inquirer.prompt({
+    return inquirer.prompt({
         type: 'list',
         name: 'type',
         message: 'Would you like to add an employee?',
@@ -20,23 +20,20 @@ function createEmployee() {
         ]  
     })
     .then((empType) => {
-        if (empType.type !== 'Done adding employees') {
-            teamNum++; 
-        }
+        // if (empType.type !== 'Done adding employees') {
+        //     teamNum++; 
+        // }
 
         if(empType.type === "Manager") {
                 teamMembers.push(new Manager());
-                    teamMembers[teamNum].getName()
-                    .then(() => 
-                    teamMembers[teamNum].getId())
-                    .then(() => 
-                    teamMembers[teamNum].getEmail())
-                    .then(() => 
-                    teamMembers[teamNum].getOfficeNumber())
-                    .then(() => 
-                createEmployee());  
+                return teamMembers[teamNum].getName()
+                .then(() => teamMembers[teamNum].getOfficeNumber())
+                    .then(() => {
+                        teamNum++;
+                        console.log(teamMembers)
+                        return createEmployee()});  
         }
-        if(empType.type === "Engineer") {
+        else if(empType.type === "Engineer") {
                     teamMembers.push(new Engineer());
                         teamMembers[teamNum].getName()
                         .then(() => 
@@ -46,9 +43,9 @@ function createEmployee() {
                         .then(() => 
                         teamMembers[teamNum].getGithub())
                     .then(() => 
-                createMember())
+                createEmployee())
         }
-        if(empType.type === "Intern") {
+        else if(empType.type === "Intern") {
                 teamMembers.push(new Intern());
                     teamMembers[teamNum].getName()
                     .then(() => 
@@ -58,24 +55,28 @@ function createEmployee() {
                     .then(() => 
                     teamMembers[teamNum].getSchool())
                     .then(() => 
-                createMember())
+                createEmployee())
         }
         else { 
-            return empType;
+            teamCreated(teamMembers)
+            return;
         }
       }).then(() => 
-        generateHTML(teamMembers, teamNum)
-    )
-    .then(HTMLFile => {
-            return writeToFile(HTMLFile);
-        })
-    .catch(err => {
+        generateHtml(teamMembers)
+        ).catch(err => {
         console.log(err);}); 
 };
 
 createEmployee();
 
-
+function teamCreated(teamMembers) {
+    const fileName = "./dist/index.html"
+    fs.writeFile(fileName, generateHtml(teamMembers), err => {
+        if (err) {
+          return err;
+        }
+    })
+}
 
 // const questions = {
 //     manager: managerQs,
@@ -90,11 +91,3 @@ createEmployee();
 //     })
 // }
 
-// function teamCreated(team) {
-//     const fileName = "./dist/index.html"
-//     fs.writeFile(fileName, generateHtml(team), err => {
-//         if (err) {
-//           return err;
-//         }
-//     })
-// }

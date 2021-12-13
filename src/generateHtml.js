@@ -5,7 +5,7 @@ var github = '';
 var officeNum = '';
 var internSchool = '';
 
-var teamCards = `
+return `
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,13 +27,13 @@ var teamCards = `
         <div class="card" style="width: 18rem;">
           <!-- <img src="..." class="card-img-top" alt="..."> -->
           <div class="card-body bg-primary text-light">
-            <h5 class="card-title">${data.name}</h5>
+            <h5 class="card-title">${data[i].name}</h5>
             <p class="card-text"></p>
           </div>
           <div class="bg-light">
           <ul class="list-group my-4 px-2">
-            <li class="list-group-item">Employee ID: ${data.employeeID}</li>
-            <li class="list-group-item">Email: <a href="mailto:${data.email}">${data.email}</a></li>  
+            <li class="list-group-item">Employee ID: ${data[i].employeeID}</li>
+            <li class="list-group-item">Email: <a href="mailto:${data[i].email}">${data[i].email}</a></li>  
             </ul>
           </div>
         </div>
@@ -45,7 +45,6 @@ var teamCards = `
   </body>
 </html>
 `
-return teamCards;
 }
     
 module.exports = generateHtml;
