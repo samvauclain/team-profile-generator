@@ -125,48 +125,8 @@ function createEmployee() {
           default:
             break;
       }
-
-        // teamMembers.push(res)
-               
+              
     })
 };
-
-// function createTeam() {
-//     inquirer.prompt(baseQs) 
-//     .then(res => {
-//         teamMembers.push(res)
-//         createEmployee();
-//     })  
-// }
-
-// function addEmployee() {
-//     inquirer.prompt(baseQs).then(data=> {
-//         console.log(data)    
-//     })
-// }
-
-// function addManager() {
-//     inquirer.prompt(managerQs).then(data=> {
-//         console.log(data)    
-//     })
-// }
-
-// function addEngineer() {
-//     inquirer.prompt(baseQs).then(data=> {
-//         console.log(data.name)
-//     })
-// }
-
-// function addIntern() {
-//     inquirer.prompt(baseQs).then(data=> {
-//         console.log(data.name)
-//     })
-// }
-
-// function writeToFile(fileName, data) {
-
-// }
-
-// createTeam();
 
 createEmployee();
