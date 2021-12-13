@@ -20,42 +20,37 @@ function createEmployee() {
         ]  
     })
     .then((empType) => {
-        // if (empType.type !== 'Done adding employees') {
-        //     teamNum++; 
-        // }
-
         if(empType.type === "Manager") {
-                teamMembers.push(new Manager());
-                return teamMembers[teamNum].getName()
-                .then(() => teamMembers[teamNum].getOfficeNumber())
-                    .then(() => {
-                        teamNum++;
-                        console.log(teamMembers)
-                        return createEmployee()});  
+            teamMembers.push(new Manager());
+            return teamMembers[teamNum].getBasicInfo()
+            .then(() => teamMembers[teamNum].getOfficeNumber())
+            .then(() => teamMembers[teamNum].role = "Manager")
+            .then(() => {
+                teamNum++;
+                console.log(teamMembers)
+                return createEmployee()});  
         }
         else if(empType.type === "Engineer") {
-                    teamMembers.push(new Engineer());
-                        teamMembers[teamNum].getName()
-                        .then(() => 
-                        teamMembers[teamNum].getId())
-                        .then(() => 
-                        teamMembers[teamNum].getEmail())
-                        .then(() => 
-                        teamMembers[teamNum].getGithub())
-                    .then(() => 
-                createEmployee())
+            teamMembers.push(new Engineer());
+            return teamMembers[teamNum].getBasicInfo()
+            .then(() => teamMembers[teamNum].getGitHub())
+            .then(() => teamMembers[teamNum].role = "Engineer")
+            .then(() => teamMembers[teamNum].icon = `<span class="material-icons">developer_mode</span>`)
+            .then(() => {
+                teamNum++;
+                return createEmployee()
+            })
         }
         else if(empType.type === "Intern") {
-                teamMembers.push(new Intern());
-                    teamMembers[teamNum].getName()
-                    .then(() => 
-                    teamMembers[teamNum].getId())
-                    .then(() => 
-                    teamMembers[teamNum].getEmail())
-                    .then(() => 
-                    teamMembers[teamNum].getSchool())
-                    .then(() => 
-                createEmployee())
+            teamMembers.push(new Intern());
+            return teamMembers[teamNum].getBasicInfo()
+                .then(() => 
+                teamMembers[teamNum].getSchool())
+                .then(() => teamMembers[teamNum].role = "Intern")
+                .then(() => {
+                    teamNum++;
+                    return createEmployee();
+                })          
         }
         else { 
             teamCreated(teamMembers)
