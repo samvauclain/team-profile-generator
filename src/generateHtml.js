@@ -2,13 +2,13 @@
 function generateHtml(data) {
   console.log('data in generate:', data)
   console.log('data length in generate:', data.length)
-  var card = '';
 
   function buildCards() {
-    
-    for (var i = 0; i <= data.length; i++) {
-      return card += `<div class="col">
-      <div class="card" style="width: 18rem;">
+    var cards = '';
+
+    for (var i = 0; i < data.length; i++) {
+      cards += `<div class="col">
+      <div class="card">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body bg-primary text-light">
           <h5 class="card-title">${data[i].name}</h5>
@@ -23,6 +23,7 @@ function generateHtml(data) {
       </div>
       </div>`  
   }
+    return cards;
   }
   
   var github = '';
@@ -45,7 +46,9 @@ function generateHtml(data) {
   </div>
   
   <div class="container mt-5">
+  <div class="row">
       ${buildCards()}
+  </div>  
   </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     </body>
